@@ -45,8 +45,13 @@ class ViewController: UIViewController {
             questionNumber += 1
         }
     }
+    
+//    func verifyAnswer()
 
     @IBAction func buttonTapped(_ sender: UIButton) {
+        //TODO: implement verification of answer
+//        verifyAnswer(sender)
+        
         updateQuestionNumber()
         updateUI()
         
