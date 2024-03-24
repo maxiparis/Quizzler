@@ -4,6 +4,7 @@
 //
 //  Created by Angela Yu on 12/07/2019.
 //  Copyright © 2019 The App Brewery. All rights reserved.
+
 //  Updated by Max Paris on 3/22/2024
 //
 
@@ -28,10 +29,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var progressBar: UIImageView!
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var trueButton: BooleanButton!
+    @IBOutlet weak var falseButton: BooleanButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        trueButton.value = true
+        falseButton.value = false
     }
     
     func updateUI(){
@@ -46,17 +51,31 @@ class ViewController: UIViewController {
         }
     }
     
-//    func verifyAnswer()
-
-    @IBAction func buttonTapped(_ sender: UIButton) {
-        //TODO: implement verification of answer
-//        verifyAnswer(sender)
+    
+    func highlightAnswer(correctAnswer: Bool, button: UIButton){
+        if correctAnswer {
+            button.backgroundColor = UIColor.green
+        } else {
+            button.backgroundColor = UIColor.red
+        }
         
-        updateQuestionNumber()
-        updateUI()
-        
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(clearAnswer), userInfo: nil, repeats: false)
     }
     
+    func validateAnswer(from sender: BooleanButton) -> Bool {
+        return quiz[questionNumber].answer == sender.value
+    }
+    
+    @IBAction func buttonTapped(_ sender: BooleanButton) {
+        highlightAnswer(correctAnswer: validateAnswer(from: sender), button: sender)
+        updateQuestionNumber()
+        updateUI()
+    }
+    
+    @objc func clearAnswer(){
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
+    }
     
 }
 
