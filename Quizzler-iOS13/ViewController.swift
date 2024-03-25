@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     var questionNumber = 0
     
-    @IBOutlet weak var progressBar: UIImageView!
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var trueButton: BooleanButton!
     @IBOutlet weak var falseButton: BooleanButton!
@@ -41,6 +41,8 @@ class ViewController: UIViewController {
     
     func updateUI(){
         questionLabel.text = quiz[questionNumber].text
+        let percentageBar = Float( Float(questionNumber) / Float(quiz.count) )
+        progressBar.progress = percentageBar
     }
     
     func updateQuestionNumber(){
