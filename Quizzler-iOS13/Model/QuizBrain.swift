@@ -24,13 +24,23 @@ struct QuizBrain {
     
     var questionNumber = 0
     
-    func validateAnswer(from sender: BooleanButton) -> Bool {
+    var score = 0
+    
+    func getScore() -> Int{
+        return score
+    }
+    
+    mutating func validateAnswer(from sender: BooleanButton) -> Bool {
+        if (quiz[questionNumber].answer == sender.value) {
+            score += 1
+        }
         return quiz[questionNumber].answer == sender.value
     }
     
     mutating func increaseQuestionNumber() {
         if (questionNumber == quiz.count - 1){
             questionNumber = 0
+            score = 0
         } else {
             questionNumber += 1
         }

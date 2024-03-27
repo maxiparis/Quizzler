@@ -13,6 +13,7 @@ import UIKit
 class ViewController: UIViewController {
     // test
     
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var trueButton: BooleanButton!
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
     func updateUI(){
         questionLabel.text = quizBrain.getQuestionText()
         progressBar.progress = quizBrain.getProgress()
+        scoreLabel.text = "Score: \(quizBrain.getScore())"
     }
     
     func highlightAnswer(correctAnswer: Bool, button: UIButton){
